@@ -1,31 +1,24 @@
-import { useState } from "react";
 import { Client as Styletron } from "styletron-engine-atomic";
 import { Provider as StyletronProvider } from "styletron-react";
 import { LightTheme, BaseProvider } from "baseui";
-import { Button } from "baseui/button";
+import CodeScanner from "./code-scanner";
 
 const engine = new Styletron();
 
 function App() {
-  const [count, setCount] = useState(0);
-
+  const onNewScanResult = (...args) => {
+    console.log(args);
+  };
   return (
     <StyletronProvider value={engine}>
       <BaseProvider theme={LightTheme}>
-        <div className="App">
-          <h1>Vite + React</h1>
-          <div className="card">
-            <Button onClick={() => setCount((count) => count + 1)}>
-              count is {count}
-            </Button>
-            <p>
-              Edit <code>src/App.tsx</code> and save to test HMR
-            </p>
-          </div>
-          <p className="read-the-docs">
-            Click on the Vite and React logos to learn more
-          </p>
-        </div>
+        <CodeScanner
+          fps={10}
+          qrbox={250}
+          disableFlip={false}
+          qrCodeSuccessCallback={onNewScanResult}
+          qrCodeErrorCallback1={onNewScanResult}
+        />
       </BaseProvider>
     </StyletronProvider>
   );
