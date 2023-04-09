@@ -6,7 +6,7 @@ import AddDrinkForm from './add-drink-form'
 import CocktailsSearch from './cocktails-search'
 
 export default function Drinks() {
-  const [value, setValue] = useState(['rum', 'vodka'])
+  const [value, setValue] = useState(['gin', 'angostura bitters', 'dry vermouth'])
 
   const handleDelete = (drink: string) => {
     setValue(p => p.filter(d => d !== drink))
