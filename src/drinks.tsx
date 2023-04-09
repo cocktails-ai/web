@@ -1,9 +1,15 @@
 import { useState } from 'react'
-import { Button } from 'baseui/button'
+import { styled } from 'baseui'
+import { Card } from 'baseui/card'
 
 import DrinksList from './drinks-list'
 import AddDrinkForm from './add-drink-form'
 import CocktailsSearch from './cocktails-search'
+
+const Wrapper = styled('section', ({ $theme }) => ({
+  maxWidth: '1000px',
+  margin: '0 auto',
+}))
 
 export default function Drinks() {
   const [value, setValue] = useState(['gin', 'angostura bitters', 'dry vermouth'])
@@ -16,12 +22,14 @@ export default function Drinks() {
   }
 
   return (
-    <div>
-      <DrinksList value={value} onDelete={handleDelete} />
-      <br />
-      <AddDrinkForm onSubmit={handleSubmit} />
+    <Wrapper>
+      <Card>
+        <DrinksList value={value} onDelete={handleDelete} />
+        <br />
+        <AddDrinkForm onSubmit={handleSubmit} />
+      </Card>
       <br />
       <CocktailsSearch drinks={value} />
-    </div>
+    </Wrapper>
   )
 }
