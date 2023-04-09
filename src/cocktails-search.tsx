@@ -4,6 +4,7 @@ import useData from './hooks/use-data'
 import { Spinner } from 'baseui/spinner'
 import { Notification } from 'baseui/notification'
 import { styled } from 'baseui'
+import Preview from './preview'
 
 type Props = {
   drinks: string[]
@@ -63,5 +64,5 @@ export default function CocktailsSearch(props: Props) {
     return <div>Didn't find anything</div>
   }
 
-  return <div>{text}</div>
+  return <Preview value={text} />
 }

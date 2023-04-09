@@ -1,7 +1,9 @@
+import ReactMarkdown from 'react-markdown'
+
 type Props = {
   value: string
 }
 
 export default function Preview({ value }: Props) {
-  return <pre>{value}</pre>
+  return <ReactMarkdown>{value}</ReactMarkdown>
 }
