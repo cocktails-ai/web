@@ -15,7 +15,6 @@ export default function SearchLoading() {
       const currentTs = Date.now()
       const diffSeconds = (currentTs - startTs) / 1000
       const value = diffSeconds * multiplier
-      console.log(currentTs, diffSeconds, value)
       setProgress(value)
     }, 200)
 

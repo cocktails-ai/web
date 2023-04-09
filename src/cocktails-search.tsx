@@ -5,6 +5,7 @@ import { Notification } from 'baseui/notification'
 import { styled } from 'baseui'
 import Preview from './preview'
 import SearchLoading from './search-loading'
+import { testPayload } from './test-payload'
 
 type Props = {
   drinks: string[]
@@ -60,16 +61,10 @@ export default function CocktailsSearch(props: Props) {
     )
   }
 
-  let text
-  if (typeof data === 'string') {
-    text = JSON.parse(data).cocktails
-  } else {
-    text = data.cocktails
-  }
-
-  if (!text) {
+  const result = data?.cocktails_parsed
+  if (!Array.isArray(result)) {
     return <Centered>Didn't find anything</Centered>
   }
 
-  return <Preview value={text} />
+  return <Preview value={result} />
 }
