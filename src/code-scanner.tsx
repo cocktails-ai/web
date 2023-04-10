@@ -5,7 +5,7 @@ type Props = {
   fps?: number
   qrbox?: number
   disableFlip?: boolean
-  qrCodeSuccessCallback?: () => void
+  qrCodeSuccessCallback?: (c: string) => void
   qrCodeErrorCallback?: () => void
   aspectRatio?: any
   verbose?: boolean

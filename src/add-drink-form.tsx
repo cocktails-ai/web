@@ -23,6 +23,10 @@ export default function AddDrinkForm({ onSubmit }: Props) {
     setInputValue('')
   }
 
+  const handleScan = (product: string) => {
+    setInputValue(product)
+  }
+
   return (
     <Form onSubmit={handleSubmit}>
       <Input
@@ -34,7 +38,7 @@ export default function AddDrinkForm({ onSubmit }: Props) {
       <Button type="submit" disabled={inputValue.length === 0}>
         Add
       </Button>
-      <ScanButton />
+      <ScanButton onProduct={handleScan} />
     </Form>
   )
 }

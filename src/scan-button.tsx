@@ -1,13 +1,23 @@
 import { useState } from 'react'
 import { Button } from 'baseui/button'
-import CodeScanner from './code-scanner'
 import { Modal, ModalHeader, ModalBody, ModalFooter, ModalButton, SIZE, ROLE } from 'baseui/modal'
 import CameraIcon from './camera-icon'
+import CodeScanner from './code-scanner'
+import Scan from './scan'
 
-type Props = {}
+type Props = {
+  onProduct: (product: string) => void
+}
 
-export default function ScanButton(props: Props) {
-  const [isOpen, setIsOpen] = useState(false)
+export default function ScanButton({ onProduct }: Props) {
+  const [isOpen, setIsOpen] = useState(true)
+
+  const close = () => setIsOpen(false)
+
+  const handleProduct = (title: string) => {
+    onProduct(title)
+    close()
+  }
 
   return (
     <>
@@ -16,21 +26,20 @@ export default function ScanButton(props: Props) {
       </Button>
 
       <Modal
-        onClose={() => setIsOpen(false)}
+        onClose={close}
         closeable
         isOpen={isOpen}
         animate
         autoFocus
         size={SIZE.default}
         role={ROLE.dialog}>
-        <ModalHeader>Hello world</ModalHeader>
         <ModalBody>
-          Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare faucibus ex, non
-          facilisis nisl. Maecenas aliquet mauris ut tempus.
+          <Scan onProduct={handleProduct} />
         </ModalBody>
         <ModalFooter>
-          <ModalButton kind="tertiary">Cancel</ModalButton>
-          <ModalButton>Okay</ModalButton>
+          <ModalButton kind="secondary" onClick={close}>
+            Cancel
+          </ModalButton>
         </ModalFooter>
       </Modal>
     </>
