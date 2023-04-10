@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { styled } from 'baseui'
 import { Card } from 'baseui/card'
 
@@ -11,8 +11,35 @@ const Wrapper = styled('section', ({ $theme }) => ({
   margin: '0 auto',
 }))
 
+const DRINKS_STORAGE_KEY = 'drink-list'
+
+const drinkFromStorage = () => {
+  try {
+    const json = localStorage.getItem(DRINKS_STORAGE_KEY)
+    if (!json) {
+      return []
+    }
+    const data = JSON.parse(json)
+    if (!Array.isArray(data)) {
+      return []
+    }
+
+    return data.filter(i => typeof i === 'string' && i.trim()).map(i => i.trim())
+  } catch {
+    return []
+  }
+}
+
+const drinksToStorage = (drinks: string[]) => {
+  localStorage.setItem(DRINKS_STORAGE_KEY, JSON.stringify(drinks))
+}
+
 export default function Drinks() {
-  const [value, setValue] = useState(['gin', 'angostura bitters', 'dry vermouth'])
+  const [value, setValue] = useState(() => drinkFromStorage())
+
+  useEffect(() => {
+    drinksToStorage(value)
+  }, [value])
 
   const handleDelete = (drink: string) => {
     setValue(p => p.filter(d => d !== drink))
@@ -25,7 +52,7 @@ export default function Drinks() {
     <Wrapper>
       <Card>
         <DrinksList value={value} onDelete={handleDelete} />
-        <br />
+        {value.length ? <br /> : null}
         <AddDrinkForm onSubmit={handleSubmit} />
       </Card>
       <br />
