@@ -9,7 +9,7 @@ type Props = {
 }
 
 export default function ScanButton({ onProduct }: Props) {
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
 
   const close = () => setIsOpen(false)
 
@@ -32,9 +32,7 @@ export default function ScanButton({ onProduct }: Props) {
         autoFocus
         size={SIZE.default}
         role={ROLE.dialog}>
-        <ModalBody>
-          <Scan onProduct={handleProduct} />
-        </ModalBody>
+        <ModalBody>{isOpen ? <Scan onProduct={handleProduct} /> : null}</ModalBody>
         <ModalFooter>
           <ModalButton kind="secondary" onClick={close}>
             Cancel
