@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Button } from 'baseui/button'
 import { Modal, ModalHeader, ModalBody, ModalFooter, ModalButton, SIZE, ROLE } from 'baseui/modal'
 import CameraIcon from './camera-icon'
-import CodeScanner from './code-scanner'
 import Scan from './scan'
 
 type Props = {
